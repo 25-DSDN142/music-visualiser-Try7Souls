@@ -7,7 +7,7 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   textSize(24);
   
    let bar_spacing = height / 10;
-   let bar_height = width / 12;
+   let bar_height = width / 10;
    let bar_pos_x = width / 2;
  
 // changes 
