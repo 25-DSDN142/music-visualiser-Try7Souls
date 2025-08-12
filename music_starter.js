@@ -1,24 +1,42 @@
 
-var r = 50;
-var b = 128;
-let redY = 300;
-let redX = 250;
-let redSize = 200;
-
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
-  background(20)
+
+  background(255)
   textFont('Verdana'); // please use CSS safe fonts
-  rectMode(CENTER)
+  rectMode(CENTER);
   textSize(24);
+  strokeWeight(bass*0.5)
+  
 
-col = map(vocal, 0, 50, 0, 25);
-background(r, vocal, b);
+let drumMap =parseInt( map(drum, 0,100,30,90));
+let lineLength = 300;
+let lineStart = 100;
+let lineEnd = lineStart+lineLength;
 
-fill(vocal,other,drum)
-ellipse(redX,redY,drum*4,)
+ 
+
+colorMode(HSB);
+fill(0, 100, 100);  
+
+stroke(drumMap,80,80)
+
+  
+
+  for(let i =1; i < 15; i++){
+   let lineStep = i*50;
+   line(lineStart, lineStep, lineEnd, lineStep)
+  
+
+  }
+  
+
+
 
 }
+
+
+
 
 
    //let bar_spacing = height / 10;
