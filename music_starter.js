@@ -1,43 +1,65 @@
 
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
-  background(20)
-  textFont('Verdana'); // please use CSS safe fonts
-  rectMode(CENTER)
-  textSize(24);
-  
-   let bar_spacing = height / 10;
-   let bar_height = width / 12;
-   let bar_pos_x = width / 2;
- 
-// changes 
-   // vocal bar is red
-   fill(200, 0, 0);
-   rect(bar_pos_x, height / 2 + 1 * bar_spacing, 4 * vocal, bar_height);
-   fill(0);
-   text("vocals", bar_pos_x, height / 2 + 1 * bar_spacing + 8);
- 
-   // drum bar is green
-   fill(0, 200, 0);
-   rect(bar_pos_x, height / 2 + 2 * bar_spacing, 4 * drum, bar_height);
-   fill(0);
-   text("drums", bar_pos_x, height / 2 + 2 * bar_spacing + 8);
- 
-   // bass bar is blue
-   fill(50, 50, 240);
-   rect(bar_pos_x, height / 2 + 3 * bar_spacing, 4 * bass, bar_height);
-   fill(0);
-   text("bass", bar_pos_x, height / 2 + 3 * bar_spacing + 8);
- 
-   // other bar is white
-   fill(200, 200, 200);
-   rect(bar_pos_x, height / 2 + 4 * bar_spacing, 4 * other, bar_height);
-   fill(0);
-   text("other", bar_pos_x, height / 2 + 4 * bar_spacing + 8);
-   fill(255, 255, 0);
- 
-   // display "words"
-   textAlign(CENTER);
-   textSize(vocal);
-   text(words, width/2, height/3);
+
+// Background 
+
+background(0);
+
+rectMode(CENTER);
+ellipseMode(CENTER);
+
+// Drums
+// Bones that move from left to right
+let howManyBones = 7;         // number of bones 
+let speed = 5;                // how fast they move
+let spacing = 200;            // space between bones
+
+for (let i = 0; i < howManyBones; i++) {
+
+let x = (counter * speed + i * spacing) % width;
+let y = 120 + i * 80;
+
+// draw a bone at that spot
+drawBone(x, y, 80, 20, color(255));
+}
+
+// Bass
+// spinning blue bone in center 
+push();
+translate(width / 2, height / 2);
+
+let spin = map(bass, 0, 100, 0, TWO_PI);
+rotate(spin + counter * 0.05);
+
+for (let i = 0; i < 4; i++) {
+rotate(HALF_PI);
+drawBone(0, 0, 180, 30, color(0, 200, 255));
+}
+pop();
+
+// Vocals
+// middle circle that changes size 
+let aura = map(vocal, 0, 100, 150, 400);
+noFill();
+stroke(0, 200, 255, 150);
+strokeWeight(6);
+ellipse(width / 2, height / 2, aura);
+
+}
+
+// draw a bone shape
+function drawBone(x, y, w, h, c) {
+push();  
+translate(x, y);
+fill(c);
+noStroke();
+
+rectMode(CENTER);
+rect(0, 0, w, h);
+
+ellipse(-w / 2, 0, h, h);
+ellipse(w / 2, 0, h, h);
+pop();
+
 }
