@@ -61,4 +61,5 @@ rect(0, 0, w, h);
 ellipse(-w / 2, 0, h, h);
 ellipse(w / 2, 0, h, h);
 pop();
+
 }
